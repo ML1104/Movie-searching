@@ -1,7 +1,7 @@
 <template>
 <div>
   <input type="text" @keyup="movieSearch" v-model="inputValue">
-  <select name="" id="" v-model="searchType" @click="movieSearch">
+  <select name="" id="select" v-model="searchType" @click="movieSearch">
     <option value="movie" selected >movie</option>
     <option value="series">series</option>
     <option value="episode">episode</option>
@@ -9,9 +9,13 @@
   <ul>
     <li v-bind:key="movie.imdbID" v-for="movie in movieList" v-if="typeSelected">
       <img :src="movie.Poster" alt="">
-      <h4>{{movie.Title}}</h4>
-      <p>{{movie.Year}}</p>
-      <p>{{movie.Type}}</p> 
+      <div class="searchResults">
+        <h4>{{movie.Title}}</h4>
+        <p>{{movie.Year}}</p>
+        <p>Type: {{movie.Type}}</p> 
+        <hr>
+      </div>
+     
     </li>
   </ul>
 </div>
@@ -51,19 +55,54 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-h3 {
-  margin: 40px 0 0;
+<style  lang='scss'>
+input {
+  font-size: 45px;
+  padding: 10px;
+  width: 35%;
+  border: 2px solid #29E7CD;
+  border-radius: 15px;
+}
+#select {
+    font-size: 25px;
+    padding: 10px;
+    border: 2px solid #29E7CD;
+    display: block;
+    margin: 20px auto;
+    width: 20%;
+    option {
+      text-align: center;
+    }
 }
 ul {
-  list-style-type: none;
+  display: grid;
+  width: 60%;
   padding: 0;
+  margin: 30px auto;
+  grid-template-columns: repeat(3, 1fr);
+    li {
+    list-style-type: none;
+    padding: 0px;
+      img {
+        margin-top: 20px;
+        border-radius: 5px;
+        height: 300px;
+      }
+      h4 {
+        font-size: 25px;
+        color: #A188A6;
+      }
+      p {
+        font-size: 20px;
+        margin: 5px;
+        color: white;
+      }
+    }
+    hr {
+      color: #A188A6;
+      margin: 30px 0;
+      border-color: pink;
+    }
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
